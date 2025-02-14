@@ -1,108 +1,103 @@
-​<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HBD TO YOU</title>
+    <title>Valentine's Day Magic</title>
     <style>
       body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(to right, #ff758c, #ff7eb3);
         text-align: center;
-        font-family: Arial, sans-serif;
-        background-color: #ffe6f2;
+        color: #fff;
+        margin: 0;
+        padding: 0;
         overflow: hidden;
       }
-
-      h1 {
-        color: #ff4d79;
-        font-size: 2.5rem;
-        margin-top: 50px;
+      header {
+        padding: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        background: rgba(255, 255, 255, 0.1);
       }
-
-      .heart {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        background-color: red;
-        clip-path: polygon(
-          50% 15%,
-          100% 40%,
-          85% 100%,
-          50% 75%,
-          15% 100%,
-          0 40%
-        );
-        animation: float 5s infinite ease-in-out;
-      }
-
-      @keyframes float {
-        0% {
-          transform: translateY(100vh);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(-10vh);
-          opacity: 0;
-        }
-      }
-
       .container {
-        margin-top: 30px;
+        padding: 50px 20px;
       }
-
-      .btn {
-        background-color: #ff4d79;
-        color: white;
+      .valentine-card {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 30px;
+        border-radius: 15px;
+        width: 300px;
+        margin: 0 auto;
+        display: none;
+        transition: transform 0.5s;
+      }
+      .valentine-card.show {
+        display: block;
+        transform: scale(1.1);
+      }
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        color: #ff7eb3;
+        background: white;
         border: none;
-        padding: 15px 25px;
-        font-size: 1.2rem;
+        border-radius: 20px;
+        font-size: 18px;
         cursor: pointer;
-        border-radius: 25px;
         transition: 0.3s;
       }
-
-      .btn:hover {
-        background-color: #e6004c;
+      .button:hover {
+        background: #ff758c;
+        color: white;
       }
-
-      #message {
-        display: none;
-        margin-top: 20px;
-        max-width: 300px;
-        margin: 20px auto;
-        font-size: 1.5rem;
-        color: #ff4d79;
-        font-weight: bold;
+      .heart {
+        position: absolute;
+        font-size: 24px;
+        color: red;
+        opacity: 0.8;
+        animation: float 2s linear infinite;
+      }
+      @keyframes float {
+        from {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(-100px);
+          opacity: 0;
+        }
       }
     </style>
   </head>
   <body>
-    <h1>Happy Birthday</h1>
-
+    <header>Happy Valentine's Day ❤️</header>
     <div class="container">
-      <button class="btn" onclick="showMessage()">Gift</button>
-      <div id="message">អ្នកទទួលបានកាដូប្រពន្ធមួយមួយ</div>
+      <button class="button" onclick="showCard()">Open Your Card</button>
+      <div class="valentine-card" id="valentineCard">
+        <h2>Love & Happiness</h2>
+        <p>May your day be filled with love, joy, and sweet moments.</p>
+      </div>
     </div>
-
     <script>
-      function showMessage() {
-        document.getElementById("message").style.display = "block";
+      function showCard() {
+        document.getElementById("valentineCard").classList.add("show");
+        createHearts();
       }
 
       function createHearts() {
         for (let i = 0; i < 20; i++) {
           let heart = document.createElement("div");
+          heart.innerHTML = "❤️";
           heart.classList.add("heart");
+          heart.style.left = Math.random() * window.innerWidth + "px";
+          heart.style.top = Math.random() * window.innerHeight + "px";
+          heart.style.animationDuration = Math.random() * 2 + 1 + "s";
           document.body.appendChild(heart);
-
-          heart.style.left = Math.random() * 100 + "vw";
-          heart.style.animationDuration = Math.random() * 3 + 2 + "s";
-
-          setTimeout(() => {
-            heart.remove();
-          }, 5000);
+          setTimeout(() => heart.remove(), 2000);
         }
       }
-      setInterval(createHearts, 800);
     </script>
   </body>
 </html>
